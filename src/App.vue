@@ -1,9 +1,11 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import GiftList from './components/GiftList.vue'
+import HeadNav from "./components/HeadNav.vue";
 </script>
 
 <template>
-    <HelloWorld></HelloWorld>
+    <HeadNav></HeadNav>
+    <GiftList></GiftList>
 </template>
 
 <style scoped>

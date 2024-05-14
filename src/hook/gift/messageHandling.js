@@ -49,7 +49,7 @@ function handleChatMessage(Message, simulateData) {
 	try {
 		res = chatMessage.decode(new Uint8Array(Message.payload));
 	} catch (e) {
-		console.error("Chat message decode error", e);
+		// console.error("Chat message decode error", e);
 	}
 	if (res) {
 		const chatMsg = {
@@ -66,10 +66,12 @@ function handleGiftMessage(Message, simulateData) {
 	const giftD = giftMessage.decode(new Uint8Array(Message.payload));
 	if (giftD) {
 		const giftMsg = {
-			content: giftD.gift.name,
+			type: "礼物",
+			giftName: giftD.gift.name,
 			nickName: giftD.user.nickName,
-			giftCount: giftD.totalCount || 1,
-			count: giftD.gift.diamondCount
+			giftCount: giftD.totalCount || '1',
+			giftValue: giftD.gift.diamondCount,
+			giftImgurl:giftD.gift.image.uri,
 		};
 		simulateData(giftMsg);
 	}
@@ -113,13 +115,14 @@ function handleRoomUserMessage(Message, simulateData) {
 	const countUser = roomUser.decode(new Uint8Array(Message.payload));
 	if (countUser) {
 		const countMsg = {
+			type: '人气',
 			count: countUser.total,
 			totalUser: countUser.totalUser,
 			// msgId: countUser.common.msgId,
 			// rankScore: countUser.totalPvForAnchor,
 			// roomId: countUser.common.roomId
 		};
-		simulateData(countMsg);
+		// simulateData(countMsg);
 	}
 }
 
