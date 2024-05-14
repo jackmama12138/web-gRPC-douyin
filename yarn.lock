@@ -297,6 +297,11 @@
   dependencies:
     undici-types "~5.26.4"
 
+"@types/web@^0.0.144":
+  version "0.0.144"
+  resolved "https://registry.npmmirror.com/@types/web/-/web-0.0.144.tgz#cc80bbaaefbc907e22d8c7f98cc0da2062c469c9"
+  integrity sha512-TLnchKKvrpmQ7O8RWgBuiR+1iNQLzM8vkEU4h/MVSqerw5vpxr51sh+Bc2upjUtfgz+6LWyXtsq4rSQlGuRt7A==
+
 "@vitejs/plugin-vue@^5.0.4":
   version "5.0.4"
   resolved "https://registry.npmmirror.com/@vitejs/plugin-vue/-/plugin-vue-5.0.4.tgz"

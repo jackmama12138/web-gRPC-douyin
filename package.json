@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/web": "^0.0.144",
     "google-protobuf": "^3.21.2",
     "pako": "^2.1.0",
     "protobufjs": "^7.3.0",
