@@ -53,11 +53,12 @@ function handleChatMessage(Message, simulateData) {
 	}
 	if (res) {
 		const chatMsg = {
+			type: "弹幕",
 			content: res.content,
 			nickName: res.user.nickName,
 			gender: res.user.gender
 		};
-		// simulateData(chatMsg);
+		simulateData(chatMsg);
 	}
 }
 
@@ -122,7 +123,7 @@ function handleRoomUserMessage(Message, simulateData) {
 			// rankScore: countUser.totalPvForAnchor,
 			// roomId: countUser.common.roomId
 		};
-		// simulateData(countMsg);
+		simulateData(countMsg);
 	}
 }
 

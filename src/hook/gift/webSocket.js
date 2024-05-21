@@ -7,6 +7,7 @@ export class LinkWebSocket {
 		this.simulateData = simulateData;
 		this.closeHeart = null;
 		this.openHeart = null;
+		this.shouldReconnect = true;  // 新增：是否允许重连的标志
 	}
 
 	_connect = (url) => {
@@ -17,6 +18,13 @@ export class LinkWebSocket {
 		this.websocket.onopen = this.webSocketOpen;
 		this.websocket.onerror = this.webSocketError;
 		this.websocket.onclose = this.webSocketClose;
+	}
+
+	_disconnect = () => {
+		this.shouldReconnect = false;  // 新增：手动断开时设置标志为 false
+		if (this.websocket) {
+			this.websocket.close();
+		}
 	}
 
 	webSocketOpen = () => {
@@ -36,8 +44,11 @@ export class LinkWebSocket {
 	}
 
 	webSocketClose = (e) => {
-		console.log("---------------开始进行断网重连--------------");
-		this.closeHeart = setTimeout(this._connect.bind(this, this.url), 5000);
+		console.log("---------------WebSocket连接关闭--------------");
+		if (this.shouldReconnect) {  // 修改：只有在允许重连时才执行重连逻辑
+			console.log("---------------开始进行断网重连--------------");
+			this.closeHeart = setTimeout(this._connect.bind(this, this.url), 5000);
+		}
 	}
 
 	socketSendHeart = () => {
