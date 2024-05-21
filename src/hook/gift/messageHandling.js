@@ -55,8 +55,8 @@ function handleChatMessage(Message, simulateData) {
 		const chatMsg = {
 			type: "弹幕",
 			content: res.content,
-			nickName: res.user.nickName,
-			gender: res.user.gender
+			// nickName: res.user.nickName,
+			// gender: res.user.gender
 		};
 		simulateData(chatMsg);
 	}
@@ -65,6 +65,7 @@ function handleChatMessage(Message, simulateData) {
 function handleGiftMessage(Message, simulateData) {
 	const giftMessage = protobuf.lookup("GiftMessage");
 	const giftD = giftMessage.decode(new Uint8Array(Message.payload));
+	// console.log(giftD)
 	if (giftD) {
 		const giftMsg = {
 			type: "礼物",
@@ -73,7 +74,10 @@ function handleGiftMessage(Message, simulateData) {
 			giftCount: giftD.totalCount || '1',
 			giftValue: giftD.gift.diamondCount,
 			giftImgurl:giftD.gift.image.uri,
+			giftGroupId: giftD.groupId,
+			giftGroupCount: giftD.groupCount
 		};
+		// console.log(giftMsg)
 		simulateData(giftMsg);
 	}
 }
@@ -84,11 +88,11 @@ function handleLikeMessage(Message, simulateData) {
 	if (like) {
 		const likeMsg = {
 			// shortId: like.user.shortId,
-			content: "点赞",
-			nickName: like.user.nickName,
+			type: "点赞"
+			// nickName: like.user.nickName,
 			// gender: like.user.gender,
 			// msgId: like.common.msgId,
-			count: like.count,
+			// count: like.count,
 			// avatar: like.user.AvatarThumb.urlListList[0]
 		};
 		// simulateData(likeMsg);
@@ -101,13 +105,13 @@ function handleMemberMessage(Message, simulateData) {
 	if (member) {
 		const memberMsg = {
 			// shortId: member.user.shortId,
-			content: "入场",
-			nickName: member.user.nickName,
+			type: "入场",
+			// nickName: member.user.nickName,
 			// gender: member.user.gender,
 			// msgId: member.common.msgId,
 			// avatar: member.user.AvatarThumb.urlListList[0]
 		};
-		// simulateData(memberMsg);
+		simulateData(memberMsg);
 	}
 }
 
@@ -134,11 +138,11 @@ function handleSocialMessage(Message, simulateData) {
 		const socialMsg = {
 			// shortId: social.user.shortId,
 			content: "关注",
-			nickName: social.user.nickName,
+			// nickName: social.user.nickName,
 			// msgId: social.common.msgId,
 			// roomId: social.common.roomId,
 			// avatar: social.user.AvatarThumb.urlListList[0]
 		};
-		// simulateData(socialMsg);
+		simulateData(socialMsg);
 	}
 }

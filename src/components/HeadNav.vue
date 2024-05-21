@@ -1,29 +1,37 @@
 <template>
-    <div class="head-nav">
-        <div class="head-nav-left">
-            <a-radio-group
-                v-model:value="selected"
-                type="button"
-                class="Navfillet"
-                default-value="hot"
-                @change="handleSelection"
-            >
-                <a-radio :class="getClass('hot')" class="Navfillet" value="hot">热</a-radio>
-                <a-radio :class="getClass('income')" class="Navfillet" value="income">币</a-radio>
-            </a-radio-group>
+    <div style="width: 100%">
+        <div class="head-nav">
+            <div class="head-nav-left">
+                <a-radio-group
+                    v-model:value="selected"
+                    type="button"
+                    class="Navfillet"
+                    default-value="hot"
+                    @change="handleSelection"
+                >
+                    <a-radio :class="getClass('hot')" class="Navfillet" value="hot">热</a-radio>
+                    <a-radio :class="getClass('income')" class="Navfillet" value="income">币</a-radio>
+                </a-radio-group>
+            </div>
+            <div class="head-nav-right"><span>{{ navTitle }}</span></div>
         </div>
-        <div class="head-nav-right"><span>{{ navTitle }}</span></div>
-    </div>
         <div class="head-nav-prompt">点击头像 查看 实时数据</div>
-        <div class="head-nav-content"><component :is="currentComponent" /></div>
+    </div>
+
+        <div class="head-nav-content"><component :is="currentComponent"  /></div>
 </template>
 
 <script setup>
 import {computed, ref} from "vue";
 import HotList from './hotList.vue';
-import ChatMessage from "./ChatMessage.vue";
+// import ChatMessage from "./ChatMessage.vue";
 // import GiftList from "./GiftList.vue";
-
+import AnchorGiftLists from "./AnchorGiftLists.vue";
+// import SendGift from "./SendGift.vue";
+// import TESt from "./TESt.vue";
+// import TreeChart from "./TreeChart.vue";
+// import Anchor from "./Anchor.vue";
+// const roomId = ref('21819830');
 const selected = ref('hot');
 const navTitle = computed(() => {
     return selected.value === 'hot' ? '人气榜' : '实时数据';
@@ -38,16 +46,17 @@ const getClass = (value) => {
 };
 
 const currentComponent = computed(() => {
-    return selected.value === 'hot' ? HotList : ChatMessage;
+    return selected.value === 'hot' ? HotList : AnchorGiftLists;
 });
 
 </script>
 
 <style scoped>
 .head-nav {
-    position: fixed; /* 为了让绝对定位生效，父元素需要设置 position */
+    /*position: fixed; !* 为了让绝对定位生效，父元素需要设置 position *!*/
     display: flex;
     z-index: 500;
+    margin: 0 auto;
     width: 100%;
     min-height: 60px;
     max-height: 60px;
@@ -81,13 +90,16 @@ const currentComponent = computed(() => {
     color: #ee4970 !important;
 }
 .head-nav-content{
-    position: fixed;
+    /*position: fixed;*/
+    /*margin: 0 auto;*/
+    margin: 0 auto;
     height: 100%;
     width: 100%;
     top: 92px;
 }
 .head-nav-prompt{
-    position: fixed;
+    /*position: fixed;*/
+    margin: 0 auto;
     height: 32px;
     width: 100%;
     top: 60px;

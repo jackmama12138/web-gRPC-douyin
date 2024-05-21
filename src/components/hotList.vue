@@ -3,9 +3,23 @@ import {hotranks} from "../mock/hot.js";
 import {scores} from "../mock/scores.js";
 import {ref} from "vue";
 import {IconUserGroup} from '@arco-design/web-vue/es/icon'
+import {io} from 'socket.io-client'
+// const socket = io('http://127.0.0.1:3000')
 
 let hotLists = ref([])
 let scoreLists = ref([])
+
+// socket.on('updateData', (message) => {
+// 	hotLists.value = message
+// })
+//
+// socket.on('rankList', (message) => {
+// 	scoreLists.value = message
+// })
+
+
+
+
 
 hotLists.value = hotranks
 scoreLists.value = scores
@@ -75,7 +89,7 @@ scoreLists.value = scores
   right: 0;
 }
 .-item-content-box{
-  position: absolute;
+  /*position: absolute;*/
   z-index: 100;
   right: 0;
   width: 100%;
